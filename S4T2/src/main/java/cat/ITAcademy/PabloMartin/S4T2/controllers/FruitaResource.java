@@ -20,6 +20,7 @@ import org.springframework.validation.annotation.Validated;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,17 +49,7 @@ public class FruitaResource {
     private FruitaService fruitaService;
     
     @PostMapping(ADD)
-    public ResponseEntity<?> add(@RequestBody @Valid FruitaCreationDto fruitaDto){
-                
-        /*
-        Si no proporciona body
-            -> error 400 bad request (és un error del client)
-            MethodArgumentNotValidException 
-        Si no es compleix els criteris de @Valid 
-            -> error 400 bad request (és un error del client ja que no proporciona els valors adecuats)
-            HttpMessageNotReadableException       
-        */
-        
+    public ResponseEntity<?> add(@RequestBody @Valid FruitaCreationDto fruitaDto){         
         Fruita fruita = Fruita.builder()
                 .id(0)
                 .nom(fruitaDto.getNom())
@@ -67,6 +58,17 @@ public class FruitaResource {
         
         //si no error -> 201 created + retornar lo creat
         return ResponseEntity.status(HttpStatus.CREATED).body(fruitaService.add(fruita));        
+    }
+    
+    @PutMapping(UPDATE)
+    public ResponseEntity<?> update(@RequestBody @Valid FruitaUpdateDto fruitaDto){
+        Fruita fruita = Fruita.builder()
+                .id(fruitaDto.getId())
+                .nom(fruitaDto.getNom())
+                .quantitatQuilos(fruitaDto.getQuantitatQuilos())
+                .build();
+        //si no error -> 200 ok + retornar lo actualitzat
+        return ResponseEntity.ok(fruitaService.update(fruita));
     }
     
 }
