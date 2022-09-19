@@ -38,4 +38,9 @@ public class FruitaJpaPersistence implements FruitaPersistence{
     public void deleteOne(int id) {
         fruitaJpaRepository.deleteById(id);        
     }
+
+    @Override
+    public Optional<Fruita> getOne(int id) {
+        return fruitaJpaRepository.findById(id).map(FruitaEntity::toFruita);
+    }
 }

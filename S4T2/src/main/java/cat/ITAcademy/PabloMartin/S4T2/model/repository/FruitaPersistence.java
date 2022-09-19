@@ -15,4 +15,6 @@ public interface FruitaPersistence {
     Fruita update(Fruita fruita);
     
     void deleteOne(int id);
+    
+    Optional<Fruita> getOne(int id);
 }

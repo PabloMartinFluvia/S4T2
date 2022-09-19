@@ -70,6 +70,7 @@ public class FruitaResource {
                 .nom(fruitaDto.getNom())
                 .quantitatQuilos(fruitaDto.getQuantitatQuilos())
                 .build();
+        
         //si no error -> 200 ok + retornar lo actualitzat
         return ResponseEntity.ok(fruitaService.update(fruita));
     }
@@ -89,12 +90,12 @@ public class FruitaResource {
     }
     
     @GetMapping(GET_ONE)
-    public ResponseEntity<?> findById(@PathVariable int id){
+    public ResponseEntity<?> getOne(@PathVariable int id){
          if(id >= 1){             
              //si no error -> 200 ok + retornar lo solicitat
-             return ResponseEntity.ok(fruitaService.findById(id)); 
+             return ResponseEntity.ok(fruitaService.getOne(id)); 
          }else{
-             throw new BadRequestException("El id ha de ser >=0");
+             throw new BadRequestException("El id ha de ser >= 0");
          }     
     }
 }
