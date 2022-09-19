@@ -23,4 +23,14 @@ public class FruitaJpaPersistence implements FruitaPersistence{
     public Optional<Fruita> findByNom(String nom) {
         return fruitaJpaRepository.findByNom(nom).map(FruitaEntity::toFruita);
     }
+
+    @Override
+    public boolean existById(int id) {
+        return fruitaJpaRepository.existsById(id);
+    }
+
+    @Override
+    public Fruita update(Fruita fruita) {
+        return add(fruita);
+    }
 }
