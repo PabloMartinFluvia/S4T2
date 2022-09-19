@@ -33,4 +33,9 @@ public class FruitaJpaPersistence implements FruitaPersistence{
     public Fruita update(Fruita fruita) {
         return add(fruita);
     }
+
+    @Override
+    public void deleteOne(int id) {
+        fruitaJpaRepository.deleteById(id);        
+    }
 }

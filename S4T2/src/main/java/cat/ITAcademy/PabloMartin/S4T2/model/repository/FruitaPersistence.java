@@ -13,4 +13,6 @@ public interface FruitaPersistence {
     boolean existById(int id);
     
     Fruita update(Fruita fruita);
+    
+    void deleteOne(int id);
 }
