@@ -17,16 +17,32 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ControllerAdvice
-public class ApiExceptionHandler {    
+public class ApiExceptionHandler {   
+    
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler({
+            NotFoundException.class
+    })
+    @ResponseBody
+    public ErrorMessage notFoundRequest(Exception exception) {
+        return new ErrorMessage(exception, HttpStatus.NOT_FOUND.value());
+    }
     
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({
-            BadRequestException.class,            
+            BadRequestException.class,                        
+            org.springframework.dao.DuplicateKeyException.class,
+            org.springframework.web.bind.support.WebExchangeBindException.class,
+            org.springframework.web.bind.MissingRequestHeaderException.class,
+            org.springframework.web.bind.MissingServletRequestParameterException.class,
+            org.springframework.web.bind.MissingPathVariableException.class,
+            org.springframework.web.method.annotation.MethodArgumentTypeMismatchException.class,
+            org.springframework.web.server.ServerWebInputException.class,
             org.springframework.http.converter.HttpMessageNotReadableException.class
     })
     @ResponseBody
     public ErrorMessage badRequest(Exception exception) {
-        return new ErrorMessage(exception);
+        return new ErrorMessage(exception, HttpStatus.BAD_REQUEST.value());
     }
             
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -37,7 +53,7 @@ public class ApiExceptionHandler {
     public List<ErrorMessage> notValidBody(MethodArgumentNotValidException exception) {
         List<ErrorMessage> errorList = new LinkedList<>();
         exception.getFieldErrors().forEach(error -> {
-            errorList.add(new ErrorMessage(exception, error));
+            errorList.add(new ErrorMessage(exception, error, HttpStatus.BAD_REQUEST.value()));
         });
         return errorList;
     } 
@@ -48,10 +64,8 @@ public class ApiExceptionHandler {
     })
     @ResponseBody
     public ErrorMessage conflict(Exception exception) {
-        return new ErrorMessage(exception);
-    }
-    
-    
+        return new ErrorMessage(exception, HttpStatus.CONFLICT.value());
+    }        
     
     //ERROR MEU ==>> MUST BE SOLVED
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -59,8 +73,8 @@ public class ApiExceptionHandler {
             Exception.class
     })
     @ResponseBody
-    public ErrorMessage exception(Exception exception) {
-        exception.printStackTrace();
-        return new ErrorMessage(exception);
+    public ErrorMessage fatalUnexpectedException(Exception exception) {
+        exception.printStackTrace(); //només en la fase de dessarollo
+        return new ErrorMessage(exception, HttpStatus.INTERNAL_SERVER_ERROR.value());
     }        
 }

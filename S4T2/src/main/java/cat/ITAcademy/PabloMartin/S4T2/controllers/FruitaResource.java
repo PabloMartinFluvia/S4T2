@@ -65,6 +65,7 @@ public class FruitaResource {
                 .quantitatQuilos(fruitaDto.getQuantitatQuilos())
                 .build();
         
+        //si no error -> 201 created + retornar lo creat
         return ResponseEntity.status(HttpStatus.CREATED).body(fruitaService.add(fruita));        
     }
     
