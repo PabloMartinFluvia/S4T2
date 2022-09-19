@@ -19,6 +19,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -71,4 +73,17 @@ public class FruitaResource {
         return ResponseEntity.ok(fruitaService.update(fruita));
     }
     
+    @DeleteMapping(DELETE_ONE)
+    public ResponseEntity<?> deleteOne(@PathVariable int id){
+       /*
+        Si el client proporciona un id NO vàlid (inexistent o <= 0):
+            NO és llança error, ja que "l'objectiu del client s'ha aconseguit"
+                (no hi haurà cap fruita en la BD amb el id proporcionat)
+        */
+       
+        fruitaService.deleteOne(id);
+        
+        //si no error -> 204 no content + no retornar res en el body
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }

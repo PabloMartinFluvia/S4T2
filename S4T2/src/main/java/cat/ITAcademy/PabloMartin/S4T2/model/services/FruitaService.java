@@ -40,4 +40,10 @@ public class FruitaService {
             throw new NotFoundException("No hi ha cap fruita amb el id proporcionat: "+id);
         }
     }
+    
+    public void deleteOne(int id){
+        if(fruitaPersistence.existById(id)){ // to avoid EmptyResultDataAccessException
+            fruitaPersistence.deleteOne(id);
+        }        
+    }
 }
