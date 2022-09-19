@@ -26,7 +26,7 @@ import org.springframework.beans.BeanUtils;
 @AllArgsConstructor
 @Entity(name = "Fruites") //o @Document (mongo) // opcionalment si vui un nom diferent a la classe (en taula o coleccio)
 //@Table // per a especificacions no per defecte (nom de la taula, indexs, etc...)
-public class FruitaEnitiy{ 
+public class FruitaEntity{ 
     
     @Id   
     @GeneratedValue //strategy i generator per defecte
@@ -39,7 +39,7 @@ public class FruitaEnitiy{
     @Column(nullable = false)    
     private int quantitatQuilos;     
     
-    public FruitaEnitiy(Fruita fruita) {
+    public FruitaEntity(Fruita fruita) {
         BeanUtils.copyProperties(fruita, this);
     }
     

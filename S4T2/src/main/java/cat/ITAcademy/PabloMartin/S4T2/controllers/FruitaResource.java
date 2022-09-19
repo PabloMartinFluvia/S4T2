@@ -10,10 +10,17 @@ ResponseEnitity:
 package cat.ITAcademy.PabloMartin.S4T2.controllers;
 
 
+import cat.ITAcademy.PabloMartin.S4T2.model.domain.Fruita;
 import cat.ITAcademy.PabloMartin.S4T2.model.services.FruitaService;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,5 +46,26 @@ public class FruitaResource {
     
     @Autowired
     private FruitaService fruitaService;
+    
+    @PostMapping(ADD)
+    public ResponseEntity<?> add(@RequestBody @Valid FruitaCreationDto fruitaDto){
+                
+        /*
+        Si no proporciona body
+            -> error 400 bad request (és un error del client)
+            MethodArgumentNotValidException 
+        Si no es compleix els criteris de @Valid 
+            -> error 400 bad request (és un error del client ja que no proporciona els valors adecuats)
+            HttpMessageNotReadableException       
+        */
+        
+        Fruita fruita = Fruita.builder()
+                .id(0)
+                .nom(fruitaDto.getNom())
+                .quantitatQuilos(fruitaDto.getQuantitatQuilos())
+                .build();
+        
+        return ResponseEntity.status(HttpStatus.CREATED).body(fruitaService.add(fruita));        
+    }
     
 }
