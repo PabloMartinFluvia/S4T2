@@ -2,6 +2,8 @@ package cat.ITAcademy.PabloMartin.S4T2.model.repository.jpa;
 
 import cat.ITAcademy.PabloMartin.S4T2.model.domain.Fruita;
 import cat.ITAcademy.PabloMartin.S4T2.model.repository.FruitaPersistence;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +44,14 @@ public class FruitaJpaPersistence implements FruitaPersistence{
     @Override
     public Optional<Fruita> getOne(int id) {
         return fruitaJpaRepository.findById(id).map(FruitaEntity::toFruita);
+    }
+
+    @Override
+    public List<Fruita> getAll() {
+        List<Fruita> fruites = new LinkedList<>();
+        fruitaJpaRepository.findAll().forEach(fruitaEntity -> {
+            fruites.add(fruitaEntity.toFruita());
+        });
+        return fruites;
     }
 }

@@ -1,6 +1,7 @@
 package cat.ITAcademy.PabloMartin.S4T2.model.repository;
 
 import cat.ITAcademy.PabloMartin.S4T2.model.domain.Fruita;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -17,4 +18,6 @@ public interface FruitaPersistence {
     void deleteOne(int id);
     
     Optional<Fruita> getOne(int id);
+    
+    List<Fruita> getAll();
 }

@@ -4,6 +4,7 @@ import cat.ITAcademy.PabloMartin.S4T2.model.domain.Fruita;
 import cat.ITAcademy.PabloMartin.S4T2.model.repository.FruitaPersistence;
 import cat.ITAcademy.PabloMartin.S4T2.model.services.exceptions.ConflictException;
 import cat.ITAcademy.PabloMartin.S4T2.model.services.exceptions.NotFoundException;
+import java.util.List;
 import java.util.Optional;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -50,5 +51,10 @@ public class FruitaService {
     public Fruita getOne(int id){        
         return fruitaPersistence.getOne(id)
                 .orElseThrow(()-> new NotFoundException("No hi ha registrat cap fruita amb el id proporcionat: "+id));        
+    }
+    
+    public List<Fruita> getAll() {
+        //TO DO ==>> Cal fer algu si no hi ha cap registre / document guardat?
+        return fruitaPersistence.getAll();
     }
 }
