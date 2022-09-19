@@ -2,7 +2,7 @@
 Arquitectura de 3 capes: models del domini i entitats de la BD són equivalents
 */
 
-package cat.ITAcademy.PabloMartin.S4T2.model.repository;
+package cat.ITAcademy.PabloMartin.S4T2.model.repository.jpa;
 
 //javax.persistence: API per a la gestió dels ORM
 import cat.ITAcademy.PabloMartin.S4T2.model.domain.Fruita;
