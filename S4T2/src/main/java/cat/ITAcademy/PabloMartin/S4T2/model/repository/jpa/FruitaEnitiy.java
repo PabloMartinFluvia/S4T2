@@ -43,7 +43,7 @@ public class FruitaEnitiy{
         BeanUtils.copyProperties(fruita, this);
     }
     
-    public void fromArticle(Fruita fruita) {
+    public void fromFruita(Fruita fruita) {
         BeanUtils.copyProperties(fruita, this);
     }
 
