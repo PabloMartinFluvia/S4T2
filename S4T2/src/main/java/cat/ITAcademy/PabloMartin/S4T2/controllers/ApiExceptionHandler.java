@@ -4,11 +4,10 @@ import cat.ITAcademy.PabloMartin.S4T2.model.services.exceptions.BadRequestExcept
 import cat.ITAcademy.PabloMartin.S4T2.model.services.exceptions.ConflictException;
 import cat.ITAcademy.PabloMartin.S4T2.model.services.exceptions.ErrorMessage;
 import cat.ITAcademy.PabloMartin.S4T2.model.services.exceptions.NotFoundException;
-import java.net.BindException;
-import java.util.HashMap;
+
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -50,7 +49,7 @@ public class ApiExceptionHandler {
             org.springframework.web.bind.MethodArgumentNotValidException.class,            
     })
     @ResponseBody
-    public List<ErrorMessage> notValidBody(MethodArgumentNotValidException exception) {
+    public List<ErrorMessage> unsuccessfulValidation(MethodArgumentNotValidException exception) {
         List<ErrorMessage> errorList = new LinkedList<>();
         exception.getFieldErrors().forEach(error -> {
             errorList.add(new ErrorMessage(exception, error, HttpStatus.BAD_REQUEST.value()));
