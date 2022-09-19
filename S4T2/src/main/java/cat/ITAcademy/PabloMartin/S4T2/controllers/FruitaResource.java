@@ -98,4 +98,11 @@ public class FruitaResource {
              throw new BadRequestException("El id ha de ser >= 0");
          }     
     }
+    
+    @GetMapping(GET_ALL)
+    public ResponseEntity<?> getAll(){           
+        //si no error -> 200 ok + retornar lo solicitat
+        //encara que la coleccio / taula estigui buida, aquesta existeix + s'ha pogut obtenir + es pot retornar
+        return ResponseEntity.ok(fruitaService.getAll());
+    }    
 }
