@@ -8,14 +8,22 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-@Repository(value = "mon")
+//@Repository(value = "mon")
 public class FruitaMongoPersistence implements FruitaPersistence{
 
     @Autowired
     private FruitaMongoRepository fruitaMongoRepository;
     
+    @Autowired
+    private SequenceGeneratorService sequenceGeneratorS;
+    
     @Override
     public Fruita add(Fruita fruita) {
+        fruita.setId(sequenceGeneratorS.generateSequence(FruitaEntity.SEQUENCE_NAME));        
+        return save(fruita);
+    }
+    
+    private Fruita save (Fruita fruita){
         return fruitaMongoRepository.save(new FruitaEntity(fruita)).toFruita();
     }
 
@@ -31,7 +39,7 @@ public class FruitaMongoPersistence implements FruitaPersistence{
 
     @Override
     public Fruita update(Fruita fruita) {
-        return add(fruita);
+        return save(fruita);
     }
 
     @Override
