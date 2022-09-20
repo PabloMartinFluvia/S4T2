@@ -23,10 +23,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "fruites")
 public class FruitaEntity {
     
-    @Transient
+    @Transient // not persistent
     public static final String SEQUENCE_NAME = "fruites_sequence";
     
-    @Id    
+    @Id        
     private int id;
     
     @Indexed(unique = true)
