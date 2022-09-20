@@ -31,7 +31,7 @@ public class FruitaService {
         fruitaPersistence.findByNom(nom)             
             .ifPresent(fruita -> {
                 throw new ConflictException
-                    ("Nom ja registrar en BD (i no pot ser duplicat): " + nom);
+                    ("Existeix un altre registre amb aquest nom (i no pot ser duplicat): " + nom);
             });
     }
     
@@ -39,7 +39,7 @@ public class FruitaService {
         int id = fruita.getId();
         if(fruitaPersistence.existById(id)){
             /*
-            Si està proporcionat un nom que ja existeix en la BD
+            Si està proporcionat un nom que ja existeix en la BD en un altre registre
             -> error 409 CONFLICT -> ConflictException            
             */
             assertNomNotExist(fruita.getNom());
