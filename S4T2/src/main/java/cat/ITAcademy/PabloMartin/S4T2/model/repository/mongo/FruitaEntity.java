@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
 
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -22,7 +23,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "fruites")
 public class FruitaEntity {
     
-    @Id
+    @Transient
+    public static final String SEQUENCE_NAME = "fruites_sequence";
+    
+    @Id    
     private int id;
     
     @Indexed(unique = true)
