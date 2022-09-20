@@ -8,7 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-@Repository(value = "mongo")
+@Repository(value = "mon")
 public class FruitaMongoPersistence implements FruitaPersistence{
 
     @Autowired
