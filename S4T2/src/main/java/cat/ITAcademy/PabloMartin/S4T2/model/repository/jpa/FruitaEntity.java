@@ -1,11 +1,8 @@
-/*
-Arquitectura de 3 capes: models del domini i entitats de la BD són equivalents
-*/
-
 package cat.ITAcademy.PabloMartin.S4T2.model.repository.jpa;
 
-//javax.persistence: API per a la gestió dels ORM
 import cat.ITAcademy.PabloMartin.S4T2.model.domain.Fruita;
+
+//javax.persistence: API per a la gestió dels ORM
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,6 +14,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 import org.springframework.beans.BeanUtils;
 
 @Builder
@@ -26,7 +24,7 @@ import org.springframework.beans.BeanUtils;
 @AllArgsConstructor
 @Entity(name = "Fruites") //o @Document (mongo) // opcionalment si vui un nom diferent a la classe (en taula o coleccio)
 //@Table // per a especificacions no per defecte (nom de la taula, indexs, etc...)
-public class FruitaEnitiy{ 
+public class FruitaEntity{ 
     
     @Id   
     @GeneratedValue //strategy i generator per defecte
@@ -39,7 +37,7 @@ public class FruitaEnitiy{
     @Column(nullable = false)    
     private int quantitatQuilos;     
     
-    public FruitaEnitiy(Fruita fruita) {
+    public FruitaEntity(Fruita fruita) {
         BeanUtils.copyProperties(fruita, this);
     }
     
