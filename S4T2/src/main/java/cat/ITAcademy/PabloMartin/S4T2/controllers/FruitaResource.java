@@ -98,7 +98,7 @@ public class FruitaResource {
              //si no error -> 200 ok + retornar lo solicitat
              return ResponseEntity.ok(fruitaService.getOne(id)); 
          }else{
-             throw new BadRequestException("El id ha de ser >= 0");
+             throw new BadRequestException("El id ha de ser >= 1");
          }     
     }
     
