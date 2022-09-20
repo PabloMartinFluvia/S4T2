@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class FruitaService {
-
+    
     //per fer la prova d'injectar un altre adaptador de persistencia
     //  <-> provar de tenir dao jpa i dao mongo en un mateix projecte
     @Resource(name = "${bd.option}")
